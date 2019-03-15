@@ -1,0 +1,10 @@
+ion-content {
+    --overflow: hidden;
+   
+}
+.div{
+    display:block;
+    padding: 0;
+    height: 350px;
+    overflow: scroll;
+}

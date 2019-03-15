@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+ 
+<ion-grid>
+  <ion-row >
+     <ion-col size-sm>
+          <ion-card *ngIf="productFound">
+            <ion-card-header>
+              <h2>Price: $ {{selectedProduct.price}}</h2>
+            </ion-card-header>
+            <ion-card-content>
+              <ul>
+                <li>{{selectedProduct.plu}}</li>
+                <li>{{selectedProduct.name}}</li>
+                <li>{{selectedProduct.descr}}</li>
+              </ul>
+            </ion-card-content>
+          </ion-card>
+       
+            <div  class="div">
+              <ion-list >
+                  <ion-item *ngFor="let product of products">
+                    <h3>{{product.plu}}</h3>
+                    {{product.name}}
+                  </ion-item>
+              </ion-list>
+            </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" (click)="scan();">scan</ion-button>
+    </ion-col>
+  </ion-row>
+
+
+  </ion-grid>
+</ion-content>

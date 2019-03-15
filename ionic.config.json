@@ -1,0 +1,7 @@
+{
+  "name": "ion4CarroCompras",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
