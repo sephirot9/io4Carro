@@ -48,7 +48,7 @@ export class AppComponent {
     const toast = await this.toastCtrl.create({
       message: 'Presione de nuevo para Salir',
       duration: 3000,
-      position: 'middle'
+      position: 'bottom'
     });
 
     toast.present();

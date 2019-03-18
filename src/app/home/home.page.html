@@ -12,37 +12,26 @@
 <ion-grid>
   <ion-row >
      <ion-col size-sm>
-
-          <ion-card *ngIf="productFound">
-            <ion-card-header>
-              <h2>Price: $ {{selectedProduct.price}}</h2>
-            </ion-card-header>
-            <ion-card-content>
-              <ul>
-                <li>{{selectedProduct.plu}}</li>
-                <li>{{selectedProduct.name}}</li>
-                <li>{{selectedProduct.descr}}</li>
-              </ul>
-            </ion-card-content>
-          </ion-card>
-       
+              
             <div  class="div">
               <ion-list >
-                  <ion-item *ngFor="let product of products">
+                  <ion-item *ngFor="let product of CarroCompra; let i = index">
                     <ion-thumbnail slot="start">
                         <img [src]="'http://app.teracloud.cl/prodimg/'+ product.plu + '.jpg'" onError="src ='http://app.teracloud.cl/prodimg/sinimagen.png'"/>
                     </ion-thumbnail>
-                    <ion-label>
+                    <ion-label >
                       <ion-text><h2>{{product.name}}</h2></ion-text>
                       <ion-note><h3>{{product.descr}}</h3></ion-note>
                     </ion-label>  
                     <!-- <ion-label slot="end"> -->
-                      <ion-icon name="add-circle" color="primary"></ion-icon>
-                      1
-                      <ion-icon name="remove-circle" color="primary"></ion-icon>
-                      
+                      <ion-text >
+                          <ion-icon name="add-circle" color="primary"></ion-icon>
+                          {{product.cant}}
+                          <ion-icon name="remove-circle" color="primary"></ion-icon>
+                      </ion-text>
+                      <h2>{{product.price}}</h2>
                     <!-- </ion-label> -->
-                    <ion-icon name="trash" color="danger" slot="end"></ion-icon>
+                    <ion-icon name="trash" color="danger" (click)="borraProducto( i )" slot="end"></ion-icon>
                   </ion-item>
               </ion-list>
             </div>
@@ -50,7 +39,7 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-button color="primary" (click)="scan();">scan</ion-button>
+      <ion-button color="primary" (click)="scan();">Escanear</ion-button>
     </ion-col>
   </ion-row>
 
