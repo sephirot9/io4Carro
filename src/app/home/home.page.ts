@@ -15,12 +15,13 @@ export class HomePage {
   products: any = [];
   selectedProduct: any;
   productFound:boolean = false;
+  
 
   constructor(private barcodeScanner: BarcodeScanner,
               private toast: Toast, 
               private dataProvider: DataProviderService
               ){
-                //this.getProducts();
+               
                 this.dataProvider.getProductsOld()
                 .subscribe((response)=> {
                             this.products = response
@@ -28,6 +29,7 @@ export class HomePage {
                 });
 
   }
+
  
 //obtener productos
   getProducts() {

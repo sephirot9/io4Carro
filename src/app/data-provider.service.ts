@@ -23,6 +23,7 @@ export class DataProviderService {
       });
     });
   }
+  
   getProductsOld(){
     return this.httpOld.get(this.url+'/products.php').pipe(map
           ((response:Response)=>response.json()));  
