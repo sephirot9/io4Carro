@@ -28,8 +28,11 @@ export class HomePage {
                 this.dataProvider.getProductsOld()
                 .subscribe((response)=> {
                             this.products = response
-                            console.log(this.products);
+                            
                 });
+            
+              
+              
 
   }
 
@@ -128,6 +131,14 @@ export class HomePage {
 ////////////////////////////////////////////////////////////////
   borraProducto(idx: number){
     this.CarroCompra.splice(idx,1);
+    console.log("item eliminado: " + idx);
+  }
+  sumaCant(idx: number){
+    this.CarroCompra[idx].cant++;
+    alert("suma");
+  }
+  restaCant(idx: number){
+    alert("resta");
   }
 
 }

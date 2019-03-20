@@ -8,3 +8,26 @@ ion-content {
     height: 350px;
     overflow: scroll;
 }
+.fixedLabel {
+    min-width: 60% !important;
+    max-width: 60% !important;
+}
+.fixedTextCant {
+    min-width: 20% !important;
+    max-width: 20% !important;
+}
+.fixedTextPrice {
+    min-width: 10% !important;
+    max-width: 10% !important;
+}
+.iontextCant{
+    min-width: 30% !important;
+    max-width: 30% !important;
+    vertical-align: middle;
+}
+       
+
+.iconCant{
+    font-size: 24px;
+    vertical-align: middle;
+}
