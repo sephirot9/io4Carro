@@ -1,7 +1,10 @@
 import { DataProviderService } from './../data-provider.service';
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { IonList } from '@ionic/angular';
+
+
 
 
 
@@ -11,6 +14,8 @@ import { Toast } from '@ionic-native/toast/ngx';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+@ViewChild(IonList) list: IonList;
+// activeItemSliding: IonItemSliding = null;
 
   products: any = [];
   selectedProduct: any;
@@ -133,12 +138,51 @@ export class HomePage {
     this.CarroCompra.splice(idx,1);
     console.log("item eliminado: " + idx);
   }
+  ////////////////////////////////////////////////////////////
   sumaCant(idx: number){
-    this.CarroCompra[idx].cant++;
-    alert("suma");
+    this.products[idx].cant++;
+    
   }
   restaCant(idx: number){
-    alert("resta");
+    if(this.products[idx].cant>0){
+      this.products[idx].cant--;
+    }
   }
+  ////////////////////////////////77
+  closeSliding() {
+    this.list.closeSlidingItems();
+    }
+  ///////////////////////////////  
+  // openOption(itemSlide: IonItemSliding, item: IonItem) {
+  //   console.log('opening item slide..');
+    
+  //   if(this.activeItemSliding!==null) //use this if only one active sliding item allowed
+  //    this.closeOption();
+ 
+  //   this.activeItemSliding = itemSlide;
+ 
+  //   let swipeAmount = 194; //set your required swipe amount
+    
+  //   itemSlide.getSlidingRatio();
+  //   itemSlide.
 
+  //   // itemSlide.startSliding(swipeAmount);
+  //   // itemSlide.moveSliding(swipeAmount);
+ 
+  //   // itemSlide.setElementClass('active-options-right', true);
+  //   // itemSlide.setElementClass('active-swipe-right', true);
+ 
+  //   // item.setElementStyle('transition', null);
+  //   // item.setElementStyle('transform', 'translate3d(-'+swipeAmount+'px, 0px, 0px)');
+    
+  //  }
+ 
+  //  closeOption() {
+  //   console.log('closing item slide..');
+ 
+  //   if(this.activeItemSliding) {
+  //    this.activeItemSliding.close();
+  //    this.activeItemSliding = null;
+  //   }
+  //  }
 }
