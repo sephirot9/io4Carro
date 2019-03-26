@@ -21,6 +21,9 @@ export class HomePage {
   productFound:boolean = false;
   CarroCompra: any[] = [];
   options: BarcodeScannerOptions;
+  subTotal: number = 0;
+  iva: number = 0;
+  total:number = 0;
 
   
 
@@ -35,6 +38,7 @@ export class HomePage {
                             this.products = response
                             
                 });
+                this.sumaTotales()
             
               
               
@@ -132,24 +136,26 @@ export class HomePage {
         //arr[index] = obj;
         arr[index].cant = arr[index].cant +1; 
     }
+    this.sumaTotales()
    }
 ////////////////////////////////////////////////////////////////
   borraProducto(idx: number){
     this.products.splice(idx,1);
     console.log("item eliminado: " + idx);
-
+    this.sumaTotales()
 
 
   }
   ////////////////////////////////////////////////////////////
   sumaCant(idx: number){
     this.products[idx].cant++;
-    
+    this.sumaTotales()
   }
   restaCant(idx: number){
     if(this.products[idx].cant>0){
       this.products[idx].cant--;
     }
+    this.sumaTotales()
   }
   ////////////////////////////////77
   async alertConfirmaEliminar(idx: number) {
@@ -172,8 +178,9 @@ export class HomePage {
                  role:'Delete',
                  cssClass:'icon-color',
                  handler: () => {
-                    this.products.splice(idx,1);
-                    console.log("item eliminado: " + idx);
+                  // this.products.splice(idx,1);
+                    this.borraProducto(idx);
+                    
                   
 
                 }
@@ -187,5 +194,18 @@ export class HomePage {
     await alert.present();
 
   }
-   
+   /////////////////////////
+   sumaTotales(){
+     this.subTotal=0;
+     this.iva=0;
+     this.total=0;
+     let t=0;
+     this.products.forEach(function(obj:any) {
+      t+= parseInt(obj.cant)*parseInt(obj.price);
+       
+     });
+     this.subTotal=t;
+     this.iva=t*0.19;
+     this.total=t + this.iva;
+   }
 }

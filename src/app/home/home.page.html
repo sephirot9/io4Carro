@@ -20,8 +20,8 @@
                         <img [src]="'http://app.teracloud.cl/prodimg/'+ product.plu + '.jpg'" onError="src ='http://app.teracloud.cl/prodimg/sinimagen.png'"/>
                     </ion-thumbnail>
                     <ion-label fixed class='fixedLabel'>
-                      <ion-text><h3>{{product.name}}</h3></ion-text>
-                      <ion-note><h4>{{product.descr}}</h4></ion-note>
+                      <ion-text><h2>{{product.name}}</h2></ion-text>
+                      <ion-note><h3>{{product.descr}}</h3></ion-note>
                     </ion-label>  
                     <!-- <ion-label slot="end"> -->
                       <ion-label fixed class="fixedTextCant" text-center >
@@ -43,8 +43,9 @@
       <ion-row>
         <ion-col>
           
-                <ion-button color="danger">Pagar</ion-button>
-                <ion-button color="primary" (click)="scan();">Escanear</ion-button>
+                <ion-button color="danger"  size="large">Pagar</ion-button>
+                <ion-button color="primary"  size="large" (click)="scan();">Escanear</ion-button>
+                <ion-button color="primary" size="large">Leer RFID</ion-button>
             
       </ion-col>
       <ion-col>
@@ -61,17 +62,17 @@
               <ion-col>$4.000</ion-col>
           </ion-row> -->
           <ion-list >
-            <ion-item lines="none" >
+            <ion-item lines="none" class="no-padding"  >
               <ion-label  slot="end"  text-right fixed class="fixedLabelTotal"><b>Subtotal</b></ion-label>
-              <ion-text  slot="end" text-right fixed class="fixedTextTotal">$4.000</ion-text>
+              <ion-text  slot="end" text-right fixed class="fixedTextTotal">{{subTotal | currency:'CLP':'symbol-narrow'}}</ion-text>
             </ion-item>
-            <ion-item lines="none" >
+            <ion-item lines="none" class="no-padding"  >
                 <ion-label slot="end"  text-right fixed class="fixedLabelTotal"><b>Iva</b></ion-label>
-                <ion-text slot="end" text-right fixed class="fixedTextTotal">$40</ion-text>
+                <ion-text slot="end" text-right fixed class="fixedTextTotal">{{iva | currency:'CLP':'symbol-narrow'}}</ion-text>
               </ion-item>
-              <ion-item lines="none" >
+              <ion-item lines="none" class="no-padding">
                   <ion-label slot="end"  text-right fixed class="fixedLabelTotal"><b>Total</b></ion-label>
-                  <ion-text slot="end" text-right fixed class="fixedTextTotal">$4.040</ion-text>
+                  <ion-text slot="end" text-right fixed class="fixedTextTotal">{{total | currency:'CLP':'symbol-narrow'}}</ion-text>
                 </ion-item>
           </ion-list>
       

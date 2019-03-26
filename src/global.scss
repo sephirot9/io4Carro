@@ -1,4 +1,6 @@
 // http://ionicframework.com/docs/theming/
+
+
 @import '~@ionic/angular/css/core.css';
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
@@ -13,4 +15,8 @@
     color: #FF0000 !important;
     display: block;
     border-style: solid;
+}
+.no-padding {
+    padding: 0px !important;
+    --min-height: 25px !important;
 }

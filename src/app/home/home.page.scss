@@ -62,14 +62,15 @@ ion-content {
 .fixedTextTotal {
     min-width: 30% !important;
     max-width: 30% !important;
-    padding: 0;
+    padding: 0px !important;
     margin: 0;
+    font-size: 20px;
    
 }
 .fixedLabelTotal {
     min-width: 30% !important;
     max-width: 30% !important;
-    padding: 0;
+    padding: 0px !important;
     margin: 0;
-   
+    font-size: 20px;
 }
