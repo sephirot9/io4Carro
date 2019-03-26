@@ -1,10 +1,20 @@
+ion-header{
+    border: 0;
+	padding: 0;
+}
+
+
 ion-content {
     --overflow: hidden;
+    border: 0;
+	padding: 0;
    
 }
 .div{
     display:block;
     padding: 0;
+    border: 0;
+    width: auto !important;
     height: 350px;
     overflow: scroll;
 }
@@ -30,4 +40,36 @@ ion-content {
 .iconCant{
     font-size: 24px;
     vertical-align: middle;
+}
+.fondovacio{
+    // width: 100% !important;
+   //height: auto;
+    object-fit: cover;
+    width: auto !important;
+    //width: 750px !important;
+   // height: 345px ;
+    border: 0;
+	padding: 0;
+    //display: block;
+    //margin-left: auto;
+    //margin-right: auto;
+
+    // width: 100%;
+    // height: 250px;
+    // object-fit: contain;
+
+}
+.fixedTextTotal {
+    min-width: 30% !important;
+    max-width: 30% !important;
+    padding: 0;
+    margin: 0;
+   
+}
+.fixedLabelTotal {
+    min-width: 30% !important;
+    max-width: 30% !important;
+    padding: 0;
+    margin: 0;
+   
 }

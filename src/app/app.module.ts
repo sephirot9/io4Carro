@@ -14,6 +14,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { AlertController } from '@ionic/angular';
 
 import { HttpModule } from '@angular/http';
 
@@ -32,7 +33,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
-    Toast
+    Toast,
+    AlertController
   ],
   bootstrap: [AppComponent]
 })

@@ -3,7 +3,7 @@ import { Component,ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonList } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
 
 
 
@@ -14,8 +14,7 @@ import { IonList } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-@ViewChild(IonList) list: IonList;
-// activeItemSliding: IonItemSliding = null;
+@ViewChild(IonList) lista: IonList;
 
   products: any = [];
   selectedProduct: any;
@@ -27,7 +26,8 @@ export class HomePage {
 
   constructor(private barcodeScanner: BarcodeScanner,
               private toast: Toast, 
-              private dataProvider: DataProviderService
+              private dataProvider: DataProviderService,
+              public alertCtrl: AlertController
               ){
                
                 this.dataProvider.getProductsOld()
@@ -135,8 +135,11 @@ export class HomePage {
    }
 ////////////////////////////////////////////////////////////////
   borraProducto(idx: number){
-    this.CarroCompra.splice(idx,1);
+    this.products.splice(idx,1);
     console.log("item eliminado: " + idx);
+
+
+
   }
   ////////////////////////////////////////////////////////////
   sumaCant(idx: number){
@@ -149,40 +152,40 @@ export class HomePage {
     }
   }
   ////////////////////////////////77
-  closeSliding() {
-    this.list.closeSlidingItems();
-    }
-  ///////////////////////////////  
-  // openOption(itemSlide: IonItemSliding, item: IonItem) {
-  //   console.log('opening item slide..');
-    
-  //   if(this.activeItemSliding!==null) //use this if only one active sliding item allowed
-  //    this.closeOption();
- 
-  //   this.activeItemSliding = itemSlide;
- 
-  //   let swipeAmount = 194; //set your required swipe amount
-    
-  //   itemSlide.getSlidingRatio();
-  //   itemSlide.
+  async alertConfirmaEliminar(idx: number) {
 
-  //   // itemSlide.startSliding(swipeAmount);
-  //   // itemSlide.moveSliding(swipeAmount);
- 
-  //   // itemSlide.setElementClass('active-options-right', true);
-  //   // itemSlide.setElementClass('active-swipe-right', true);
- 
-  //   // item.setElementStyle('transition', null);
-  //   // item.setElementStyle('transform', 'translate3d(-'+swipeAmount+'px, 0px, 0px)');
-    
-  //  }
- 
-  //  closeOption() {
-  //   console.log('closing item slide..');
- 
-  //   if(this.activeItemSliding) {
-  //    this.activeItemSliding.close();
-  //    this.activeItemSliding = null;
-  //   }
-  //  }
+    const alert = await this.alertCtrl.create({
+      header: 'Aviso',
+      subHeader: 'Desea eliminar el producto?',
+      buttons: [{
+                 text:'Cancelar',
+                 role: 'Cancel',
+                 cssClass: 'secondary',
+                 handler: () => {
+                     console.log('eliminacion cancelada');
+                 }
+
+                },
+                {
+                  
+                 text:'Eliminar',
+                 role:'Delete',
+                 cssClass:'icon-color',
+                 handler: () => {
+                    this.products.splice(idx,1);
+                    console.log("item eliminado: " + idx);
+                  
+
+                }
+
+               
+
+              }]
+
+    });
+
+    await alert.present();
+
+  }
+   
 }

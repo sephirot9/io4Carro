@@ -53,12 +53,7 @@ export class AppComponent {
 
     toast.present();
 
-    // let toast1 = this.toastCtrl.create({
-    //   message: "Press again to exit",
-    //   duration: 3000,
-    //   position: "middle"
-    // });
-    // toast.then();
+    
   }
   
 }
