@@ -45,22 +45,11 @@
           
                 <ion-button color="danger"  size="large">Pagar</ion-button>
                 <ion-button color="primary"  size="large" (click)="scan();">Escanear</ion-button>
-                <ion-button color="primary" size="large">Leer RFID</ion-button>
+                <ion-button color="primary" size="large" (click)=" alertBuscaRfid()">Leer RFID</ion-button>
             
       </ion-col>
       <ion-col>
-          <!-- <ion-row>
-            <ion-col><ion-text >Subtotal</ion-text></ion-col>
-            <ion-col>$4.000</ion-col> 
-          </ion-row>
-          <ion-row> 
-              <ion-col><ion-text >IVA</ion-text></ion-col>
-              <ion-col>$4.000</ion-col>
-          </ion-row>
-          <ion-row> 
-              <ion-col><ion-text >Total</ion-text></ion-col>
-              <ion-col>$4.000</ion-col>
-          </ion-row> -->
+         
           <ion-list >
             <ion-item lines="none" class="no-padding"  >
               <ion-label  slot="end"  text-right fixed class="fixedLabelTotal"><b>Subtotal</b></ion-label>

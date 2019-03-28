@@ -2,7 +2,7 @@ import { DataProviderService } from './../data-provider.service';
 import { Component,ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
-import { IonList } from '@ionic/angular';
+import { IonList  } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
 
@@ -15,6 +15,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage {
 @ViewChild(IonList) lista: IonList;
+
 
   products: any = [];
   selectedProduct: any;
@@ -180,15 +181,9 @@ export class HomePage {
                  handler: () => {
                   // this.products.splice(idx,1);
                     this.borraProducto(idx);
-                    
-                  
-
+      
                 }
-
-               
-
-              }]
-
+          }]
     });
 
     await alert.present();
@@ -208,4 +203,58 @@ export class HomePage {
      this.iva=t*0.19;
      this.total=t + this.iva;
    }
+////////////////////////////////////////////
+async alertBuscaRfid() {
+
+  const alert = await this.alertCtrl.create({
+    header: 'Leer Etiqueta',
+    //subHeader: 'Desea eliminar el producto?',
+    inputs:[{
+              id:'txtRfid',
+              name: 'txtRfid',
+              type: 'text',
+              
+              
+              placeholder: 'Codigo RFID'
+            }],
+    buttons: [{
+               text:'Cancelar',
+               role: 'Cancel',
+               cssClass: 'secondary',
+               handler: () => {
+                   console.log('rfid cancelada');
+               }
+
+              },
+              {
+                
+               text:'Aceptar',
+               role:'ok',
+               //cssClass:'icon-color',
+               handler: ( data ) => {
+                console.log('rfid---', data);
+                
+                 this.obtenerProductoRfid(data.txtRfid);
+    
+              }
+        }]
+  });
+
+      await alert.present()
+        .then(() => {
+          //coloca foco en input del alert
+          document.getElementById('txtRfid').focus();
+          
+        })
+        .catch();
+
+ }
+
+//////////////////////////////////////////////
+obtenerProductoRfid(codigo:string){
+    alert('codigo'+ codigo);
+}
+
+
+
 }
