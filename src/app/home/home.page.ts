@@ -40,10 +40,7 @@ export class HomePage {
                             
                 });
                 this.sumaTotales()
-            
-              
-              
-
+ 
   }
 
  
@@ -217,26 +214,26 @@ async alertBuscaRfid() {
               
               placeholder: 'Codigo RFID'
             }],
-    buttons: [{
-               text:'Cancelar',
-               role: 'Cancel',
-               cssClass: 'secondary',
-               handler: () => {
-                   console.log('rfid cancelada');
-               }
+    buttons: [  {
+                  text:'Cancelar',
+                  role: 'Cancel',
+                  cssClass: 'secondary',
+                  handler: () => {
+                      console.log('rfid cancelada');
+                }
 
               },
-              {
-                
-               text:'Aceptar',
-               role:'ok',
-               //cssClass:'icon-color',
-               handler: ( data ) => {
-                console.log('rfid---', data);
-                
-                 this.obtenerProductoRfid(data.txtRfid);
-    
-              }
+                {
+                  
+                  text:'Aceptar',
+                  role:'ok',
+                  cssClass:'botonRfid',
+                  handler: ( data ) => {
+                    console.log('rfid---', data);
+                    
+                    this.obtenerProductoRfid(data.txtRfid);
+      
+                }
         }]
   });
 
@@ -244,7 +241,23 @@ async alertBuscaRfid() {
         .then(() => {
           //coloca foco en input del alert
           document.getElementById('txtRfid').focus();
+          document.getElementById('txtRfid').addEventListener("keypress", function(e){
+            //e==e || window.event;
+            if (e.keyCode == 13) {
+              console.log('enter');
+              console.log (document.getElementsByClassName('botonRfid'));
+              //se obtiene el boton en base a la clase
+              var ele = document.getElementsByClassName('botonRfid');
+              //recorremos el array de objetos para hacer clic a los elementos
+              //obviar el error
+              for (var i=0;i<ele.length; i++) {
+                ele[i].click();
+              }
+            }
+
+          }
           
+          ,false);
         })
         .catch();
 
