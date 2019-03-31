@@ -40,10 +40,7 @@ export class HomePage {
                             
                 });
                 this.sumaTotales()
-            
-              
-              
-
+ 
   }
 
  
@@ -217,13 +214,13 @@ async alertBuscaRfid() {
               
               placeholder: 'Codigo RFID'
             }],
-    buttons: [{
-               text:'Cancelar',
-               role: 'Cancel',
-               cssClass: 'secondary',
-               handler: () => {
-                   console.log('rfid cancelada');
-               }
+    buttons: [  {
+                  text:'Cancelar',
+                  role: 'Cancel',
+                  cssClass: 'secondary',
+                  handler: () => {
+                      console.log('rfid cancelada');
+                }
 
               },
               {
@@ -246,15 +243,15 @@ async alertBuscaRfid() {
           document.getElementById('txtRfid').focus();
 
           var input = document.getElementById('txtRfid');
+
           input.addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
                 //ejecuto click del boton aceptar
                 (<HTMLElement>document.getElementsByClassName('btnEnter')[0]).click()
 
               }
-            });
-        
-          
+            }, false);
+                  
         })
         .catch();
 
