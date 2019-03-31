@@ -135,7 +135,7 @@ export class HomePage {
         arr.push(obj);
     } else {
         //arr[index] = obj;
-        arr[index].cant = arr[index].cant +1; 
+        arr[index].cant = parseInt( arr[index].cant ) +1; 
     }
     this.sumaTotales()
    }
@@ -230,7 +230,7 @@ async alertBuscaRfid() {
                 
                text:'Aceptar',
                role:'ok',
-               //cssClass:'icon-color',
+               cssClass:'btnEnter',
                handler: ( data ) => {
                 console.log('rfid---', data);
                 
@@ -244,6 +244,16 @@ async alertBuscaRfid() {
         .then(() => {
           //coloca foco en input del alert
           document.getElementById('txtRfid').focus();
+
+          var input = document.getElementById('txtRfid');
+          input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                //ejecuto click del boton aceptar
+                (<HTMLElement>document.getElementsByClassName('btnEnter')[0]).click()
+
+              }
+            });
+        
           
         })
         .catch();
@@ -252,7 +262,41 @@ async alertBuscaRfid() {
 
 //////////////////////////////////////////////
 obtenerProductoRfid(codigo:string){
-    alert('codigo'+ codigo);
+  this.selectedProduct = {};
+  // objeto producto para carro de compras
+    let prod: any ={
+      cant:1,
+      name:'',
+      plu:'',
+      descr:'',
+      price:0
+    }; 
+
+    //busca el producto en el arreglo de productos
+    this.selectedProduct = this.products.find(product => product.rfid === codigo);
+    
+    //verifica si el producto fue encontrado 
+    if(this.selectedProduct !== undefined) {
+
+      prod.name = this.selectedProduct.name;
+      prod.plu = this.selectedProduct.plu;
+      prod.price = this.selectedProduct.price;
+      prod.descr = this.selectedProduct.descr;
+
+      //valida si existe el producto en carro 
+      this.validaProducto(this.products, prod);
+        
+    }else {
+      //si no encuentra el producto...
+      console.log('no encontrado');
+      alert('Producto no Encontrado');
+      // this.toast.show(`Producto no encontrado`, '5000', 'center').subscribe(
+      //     toast => {
+      //       console.log(toast);
+      //     }
+      // );
+    } 
+   
 }
 
 
