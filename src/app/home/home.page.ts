@@ -295,7 +295,24 @@ obtenerProductoRfid(codigo:string){
     } 
    
 }
+//////////////////////////
+pagar(){
+  let sale: any ={
+    numsale:"",
+	  imei:"",
+	  total:""
+  }; 
+  var fecha  = new Date();
 
+  sale.numsale="" + fecha.getDate() + fecha.getTime();
+  sale.imei="292929";
+  sale.total = this.total;
+
+  console.log(sale);
+  this.dataProvider.addSale(sale).then((response)=> {
+     console.log(response);  
+  });
+}
 
 
 }

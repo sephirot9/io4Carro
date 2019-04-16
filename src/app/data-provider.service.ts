@@ -29,4 +29,20 @@ export class DataProviderService {
           ((response:Response)=>response.json()));  
   }
 
+  // addSale(data: any){
+  //   return this.httpOld.post(this.url+'/sales.php', data).subscribe((response) => {
+  //            console.log(response);
+  //     });
+  // }
+  
+  addSale(data: any) {
+    return new Promise((resolve, reject) => {
+      this.httpOld.post(this.url+'/sales.php', JSON.stringify(data))
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
