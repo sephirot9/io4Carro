@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
 
-  public counter=0;
+  public counter=-1;
 
   constructor(
     private platform: Platform,
@@ -37,7 +37,10 @@ export class AppComponent {
         this.counter++;
         this.presentToast();
         setTimeout(() => {this.counter =0},3000);
-
+      
+      }else if(this.counter==-1){
+        this.counter++;
+        setTimeout(() => {this.counter =-1},3000);
       }else{
         navigator['app'].exitApp();
       }

@@ -4,6 +4,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonList  } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -21,7 +22,7 @@ export class HomePage {
   selectedProduct: any;
   productFound:boolean = false;
   CarroCompra: any[] = [];
-  options: BarcodeScannerOptions;
+  barcodeOptions: BarcodeScannerOptions;
   subTotal: number = 0;
   iva: number = 0;
   total:number = 0;
@@ -39,7 +40,12 @@ export class HomePage {
                             this.products = response
                             
                 });
-                this.sumaTotales()
+                this.sumaTotales();
+
+                this.barcodeOptions={
+                  showTorchButton: true,
+                  showFlipCameraButton: true
+                };
  
   }
 
@@ -75,7 +81,7 @@ export class HomePage {
         price:0
       }; 
 
-    this.barcodeScanner.scan().then(barcodeData => {
+    this.barcodeScanner.scan(this.barcodeOptions).then(barcodeData => {
       console.log('Barcode data', barcodeData);
       //se obtiene el producto en base al codigo leido
       this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
@@ -300,19 +306,35 @@ pagar(){
   let sale: any ={
     numsale:"",
 	  imei:"",
-	  total:""
+    total:"",
+    detalle:[]
   }; 
   var fecha  = new Date();
 
   sale.numsale="" + fecha.getDate() + fecha.getTime();
   sale.imei="292929";
   sale.total = this.total;
+  sale.detalle = this.products;
+
 
   console.log(sale);
   this.dataProvider.addSale(sale).then((response)=> {
      console.log(response);  
+    // this.encodeText(sale.numsale);
+     alert("fin de la compra");
+
   });
 }
+/// crear codigo para pago
+encodeText(encodeData:any){
+  this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,encodeData).then((encodedData) => {
 
+      console.log(encodedData);
+     // this.encodedData = encodedData;
+
+  }, (err) => {
+      console.log("Error: " + err);
+  });                 
+}
 
 }
