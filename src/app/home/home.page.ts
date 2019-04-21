@@ -4,8 +4,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonList  } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-
+import { Device } from '@ionic-native/device/ngx';
 
 
 
@@ -32,7 +31,8 @@ export class HomePage {
   constructor(private barcodeScanner: BarcodeScanner,
               private toast: Toast, 
               private dataProvider: DataProviderService,
-              public alertCtrl: AlertController
+              public alertCtrl: AlertController,
+              private device: Device
               ){
                
                 this.dataProvider.getProductsOld()
@@ -312,7 +312,7 @@ pagar(){
   var fecha  = new Date();
 
   sale.numsale="" + fecha.getDate() + fecha.getTime();
-  sale.imei="292929";
+  sale.imei= this.device.uuid;
   sale.total = this.total;
   sale.detalle = this.products;
 

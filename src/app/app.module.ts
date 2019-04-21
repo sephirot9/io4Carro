@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 
 import { HttpModule } from '@angular/http';
+import { Device } from '@ionic-native/device/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,8 @@ import { HttpModule } from '@angular/http';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
     Toast,
-    AlertController
+    AlertController,
+    Device
   ],
   bootstrap: [AppComponent]
 })
