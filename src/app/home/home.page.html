@@ -12,10 +12,10 @@
      <ion-col > -->
               
             <div  class="div">
-              <img class="fondovacio" src="../../assets/img/fondo2.jpg" *ngIf="products.length==0" />
-              <ion-list #lista *ngIf="products.length>0" class="fila">
+              <img class="fondovacio" src="../../assets/img/fondo2.jpg" *ngIf="CarroCompra.length==0" />
+              <ion-list #lista *ngIf="CarroCompra.length>0" class="fila">
                   
-                  <ion-item  #itemprod  *ngFor="let product of products; let i = index" >
+                  <ion-item  #itemprod  *ngFor="let product of CarroCompra; let i = index" >
                     <ion-thumbnail >
                         <img [src]="'http://app.teracloud.cl/prodimg/'+ product.plu + '.jpg'" onError="src ='http://app.teracloud.cl/prodimg/sinimagen.png'"/>
                     </ion-thumbnail>
@@ -43,7 +43,7 @@
       <ion-row>
         <ion-col>
           
-                <ion-button color="danger"  size="large" (click)="pagar();">Pagar</ion-button>
+                <ion-button color="danger"  size="large" (click)="ValidarFinCompra();">Pagar</ion-button>
                 <ion-button color="primary"  size="large" (click)="scan();">Leer Barcode</ion-button>
                 <ion-button color="primary" size="large" (click)=" alertBuscaRfid()">Leer RFID</ion-button>
             

@@ -38,7 +38,9 @@ export class HomePage {
                 this.dataProvider.getProductsOld()
                 .subscribe((response)=> {
                             this.products = response
-                            
+                            console.log("productos cargados");
+
+
                 });
                 this.sumaTotales();
 
@@ -144,7 +146,7 @@ export class HomePage {
    }
 ////////////////////////////////////////////////////////////////
   borraProducto(idx: number){
-    this.products.splice(idx,1);
+    this.CarroCompra.splice(idx,1);
     console.log("item eliminado: " + idx);
     this.sumaTotales()
 
@@ -152,12 +154,12 @@ export class HomePage {
   }
   ////////////////////////////////////////////////////////////
   sumaCant(idx: number){
-    this.products[idx].cant++;
+    this.CarroCompra[idx].cant++;
     this.sumaTotales()
   }
   restaCant(idx: number){
-    if(this.products[idx].cant>0){
-      this.products[idx].cant--;
+    if(this.CarroCompra[idx].cant>0){
+      this.CarroCompra[idx].cant--;
     }
     this.sumaTotales()
   }
@@ -198,7 +200,7 @@ export class HomePage {
      this.iva=0;
      this.total=0;
      let t=0;
-     this.products.forEach(function(obj:any) {
+     this.CarroCompra.forEach(function(obj:any) {
       t+= parseInt(obj.cant)*parseInt(obj.price);
        
      });
@@ -287,7 +289,7 @@ obtenerProductoRfid(codigo:string){
       prod.descr = this.selectedProduct.descr;
 
       //valida si existe el producto en carro 
-      this.validaProducto(this.products, prod);
+      this.validaProducto(this.CarroCompra, prod);
         
     }else {
       //si no encuentra el producto...
@@ -312,18 +314,29 @@ pagar(){
   var fecha  = new Date();
 
   sale.numsale="" + fecha.getDate() + fecha.getTime();
-  sale.imei= this.device.uuid;
+  sale.imei= this.device.serial;
   sale.total = this.total;
-  sale.detalle = this.products;
-
+  sale.detalle = this.CarroCompra; //// cambiar por carro...
 
   console.log(sale);
+  //almacena la venta en bbdd y genera QR
   this.dataProvider.addSale(sale).then((response)=> {
      console.log(response);  
-    // this.encodeText(sale.numsale);
-     alert("fin de la compra");
 
+     this.encodeText(sale.numsale+sale.imei);
+
+     this.CarroCompra = [];
+     this.subTotal=0;
+     this.iva=0;
+     this.total=0;
+
+     alert("Compra finalizada... Gracias Por su compra" );
+     
+
+     //window.location.reload();
   });
+
+
 }
 /// crear codigo para pago
 encodeText(encodeData:any){
@@ -336,5 +349,47 @@ encodeText(encodeData:any){
       console.log("Error: " + err);
   });                 
 }
+ ////////////////////////////////77
+  async alertConfirmaCompra() {
 
+    const alert = await this.alertCtrl.create({
+      header: 'Aviso',
+      subHeader: 'Desea Finalizar su compra?',
+      buttons: [{
+                 text:'Continuar Comprado',
+                 role: 'Cancel',
+                 cssClass: 'secondary',
+                 handler: () => {
+                     console.log('compra no finalizada');
+                 }
+
+                },
+                {
+                  
+                 text:'Finalizar Compra',
+                 role:'ok',
+                 cssClass:'icon-color',
+                 handler: () => {
+                     console.log("compra finalizada");
+                    this.pagar();
+                    this.CarroCompra = [];
+                    this.subTotal=0;
+                    this.iva=0;
+                    this.total=0;
+      
+                }
+          }]
+    });
+
+
+    await alert.present();
+
+  }
+  ValidarFinCompra(){
+    if(this.CarroCompra.length==0){
+      alert("No ha agregado productos");
+    }else{
+      this.alertConfirmaCompra();
+    }
+  }
 }
