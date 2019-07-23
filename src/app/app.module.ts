@@ -14,10 +14,12 @@ import { Toast } from '@ionic-native/toast/ngx';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 import { HttpModule } from '@angular/http';
 import { Device } from '@ionic-native/device/ngx';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +38,8 @@ import { Device } from '@ionic-native/device/ngx';
     BarcodeScanner,
     Toast,
     AlertController,
-    Device
+    Device,
+    ToastController
   ],
   bootstrap: [AppComponent]
 })

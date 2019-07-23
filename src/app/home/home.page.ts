@@ -3,7 +3,7 @@ import { Component,ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonList  } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 
 
@@ -32,7 +32,8 @@ export class HomePage {
               private toast: Toast, 
               private dataProvider: DataProviderService,
               public alertCtrl: AlertController,
-              private device: Device
+              private device: Device,
+              private toastCtrl: ToastController
               ){
                
                 this.dataProvider.getProductsOld()
@@ -316,7 +317,7 @@ pagar(){
   sale.numsale="" + fecha.getDate() + fecha.getTime();
   sale.imei= this.device.serial;
   sale.total = this.total;
-  sale.detalle = this.CarroCompra; //// cambiar por carro...
+  sale.detalle = this.CarroCompra; 
 
   console.log(sale);
   //almacena la venta en bbdd y genera QR
@@ -329,10 +330,10 @@ pagar(){
      this.subTotal=0;
      this.iva=0;
      this.total=0;
-
+     
      alert("Compra finalizada... Gracias Por su compra" );
      
-
+     
      //window.location.reload();
   });
 
@@ -341,7 +342,7 @@ pagar(){
 /// crear codigo para pago
 encodeText(encodeData:any){
   this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,encodeData).then((encodedData) => {
-
+      
       console.log(encodedData);
      // this.encodedData = encodedData;
 
@@ -392,4 +393,6 @@ encodeText(encodeData:any){
       this.alertConfirmaCompra();
     }
   }
+
+  
 }
